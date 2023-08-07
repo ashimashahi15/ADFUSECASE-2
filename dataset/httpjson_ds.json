@@ -1,0 +1,17 @@
+{
+	"name": "httpjson_ds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Httpjson_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			}
+		},
+		"schema": {}
+	}
+}
