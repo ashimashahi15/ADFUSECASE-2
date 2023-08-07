@@ -1,0 +1,10 @@
+{
+	"name": "aky_adls_ls",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://keyvaultforadf.vault.azure.net/"
+		}
+	}
+}
