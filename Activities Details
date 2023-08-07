@@ -1,0 +1,15 @@
+Activities Used:
+
+Azure Functions
+Azure Functions (from Microsoft Azure) is a cloud-based serverless service that allows running event-triggered code in a scalable way without providing or
+managing infrastructure. It enables the capability to run a script or piece of code in response to a variety of events and doesn’t need to run continuously.
+
+The most common use cases of Azure Functions include:
+
+Reminders and notifications
+Scheduled tasks and messages
+File processing
+Data or data streams processing
+Running background backup tasks
+Computing backend calculations
+Lightweight Web APIs, proofs of concept, MVPs
