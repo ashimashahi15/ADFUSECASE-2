@@ -1,8 +1,10 @@
 # ADFUSECASE-2
-GM is one of the leading heavy vehicle manufacture company. To improve their service thay are
-planning to rollout new features based on IOT. Features include temperature, speed turbulence etc are collected by athird party device and stored in AWS cloud. 
+dbSNP (short for Single Nucleotide Polymorphism Database) is a publicly available database maintained by the National Center for Biotechnology Information (NCBI).
+It provides comprehensive information about single nucleotide polymorphisms (SNPs) and other genetic variations in various organisms, including humans.
 
-Task1: pull all data of IOT devices to AWS to azure Cloud environment.
+The main purpose of dbSNP is to collect and organize genetic variations in the form of SNPs, short insertion/deletions (indels), and other types of genetic variation. These variations are crucial for understanding genetic diversity, disease susceptibility, and personalized medicine. 
+
+Task1: pull SNP data from NIH to azure Cloud environment.
 
 Task 2: Validate the data for proper format JSON data.
 
