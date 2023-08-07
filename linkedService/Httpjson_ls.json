@@ -1,0 +1,12 @@
+{
+	"name": "Httpjson_ls",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=rs268",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
