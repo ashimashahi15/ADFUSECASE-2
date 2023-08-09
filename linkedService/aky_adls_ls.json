@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "AzureKeyVault",
 		"typeProperties": {
-			"baseUrl": "https://keyvaultforadf.vault.azure.net/"
+			"baseUrl": "https://geneticsusecasekv.vault.azure.net/"
 		}
 	}
 }
