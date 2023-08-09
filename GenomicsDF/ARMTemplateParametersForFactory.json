@@ -1,0 +1,156 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "GenomicsDF"
+		},
+		"ADLS_LS_accountKey": {
+			"value": ""
+		},
+		"GeneticsRefined_ls_connectionString": {
+			"value": ""
+		},
+		"adls2_csv_ls_accountKey": {
+			"value": ""
+		},
+		"adls_bin_ls_accountKey": {
+			"value": ""
+		},
+		"adls_binary_ls_accountKey": {
+			"value": ""
+		},
+		"adls_csv_ls_accountKey": {
+			"value": ""
+		},
+		"adls_csv_sql_ls_accountKey": {
+			"value": ""
+		},
+		"adls_csv_to_sql_ls_accountKey": {
+			"value": ""
+		},
+		"adls_json_ls_accountKey": {
+			"value": ""
+		},
+		"adls_rest_ls_accountKey": {
+			"value": ""
+		},
+		"adls_sql_Ls_connectionString": {
+			"value": ""
+		},
+		"adls_to_sql_ls_connectionString": {
+			"value": ""
+		},
+		"adls_vcf_csv_ls_accountKey": {
+			"value": ""
+		},
+		"adlsjson_ls_accountKey": {
+			"value": ""
+		},
+		"blob_binary_ls_connectionString": {
+			"value": ""
+		},
+		"gen1_ls_accountKey": {
+			"value": ""
+		},
+		"humanTissue_ls_accountKey": {
+			"value": ""
+		},
+		"human_tissue_df_ls_accountKey": {
+			"value": ""
+		},
+		"rest_adls_json_ls_accountKey": {
+			"value": ""
+		},
+		"rest_to_sql_ls_connectionString": {
+			"value": ""
+		},
+		"sql_csv_adls_la_connectionString": {
+			"value": ""
+		},
+		"vcf_adls_ds_accountKey": {
+			"value": ""
+		},
+		"vcf_csv_ls_accountKey": {
+			"value": ""
+		},
+		"ADLS_LS_properties_typeProperties_url": {
+			"value": "https://ashima26julyadls.dfs.core.windows.net/"
+		},
+		"Binary_LS_properties_typeProperties_url": {
+			"value": "https://ftp.ncbi.nlm.nih.gov/toolbox/gbench/samples/vcf/GCA_000001215.4_current_ids.vcf.gz"
+		},
+		"Httpjson_ls_properties_typeProperties_url": {
+			"value": "https://api.ncbi.nlm.nih.gov/variation/v0/refsnp/268"
+		},
+		"RestService1_properties_typeProperties_url": {
+			"value": "https://api.genome.ucsc.edu/list/"
+		},
+		"Rest_ls_properties_typeProperties_url": {
+			"value": "https://api.genome.ucsc.edu/list/publicHubs"
+		},
+		"XML_LS_properties_typeProperties_url": {
+			"value": "https://covid-19.ensembl.org/info/data/index.html"
+		},
+		"adls2_csv_ls_properties_typeProperties_url": {
+			"value": "https://ashima26julyadls.dfs.core.windows.net/"
+		},
+		"adls_bin_ls_properties_typeProperties_url": {
+			"value": "https://ashima26julyadls.dfs.core.windows.net/"
+		},
+		"adls_binary_ls_properties_typeProperties_url": {
+			"value": "https://ashima26julyadls.dfs.core.windows.net/"
+		},
+		"adls_csv_ls_properties_typeProperties_url": {
+			"value": "https://geneticsfordna.dfs.core.windows.net/"
+		},
+		"adls_csv_sql_ls_properties_typeProperties_url": {
+			"value": "https://ashima26julyadls.dfs.core.windows.net/"
+		},
+		"adls_csv_to_sql_ls_properties_typeProperties_url": {
+			"value": "https://ashima26julyadls.dfs.core.windows.net/"
+		},
+		"adls_json_ls_properties_typeProperties_url": {
+			"value": "https://ashima26julyadls.dfs.core.windows.net/"
+		},
+		"adls_rest_ls_properties_typeProperties_url": {
+			"value": "https://ashima26julyadls.dfs.core.windows.net/"
+		},
+		"adls_vcf_csv_ls_properties_typeProperties_url": {
+			"value": "https://ashima26julyadls.dfs.core.windows.net/"
+		},
+		"adlsjson_ls_properties_typeProperties_url": {
+			"value": "https://geneticsusecase2.dfs.core.windows.net/"
+		},
+		"aky_adls_ls_properties_typeProperties_baseUrl": {
+			"value": "https://geneticsusecasekv.vault.azure.net/"
+		},
+		"gen1_ls_properties_typeProperties_url": {
+			"value": "https://ashima26julyadls.dfs.core.windows.net/"
+		},
+		"http_binary1_ls_properties_typeProperties_url": {
+			"value": "https://www.proteinatlas.org/download/normal_tissue.tsv.zip"
+		},
+		"http_binary_ls_properties_typeProperties_url": {
+			"value": "https://ftp.ncbi.nlm.nih.gov/refseq/H_sapiens/annotation/GRCh38_latest/refseq_identifiers/GRCh38_latest_clinvar.vcf.gz"
+		},
+		"humanTissue_ls_properties_typeProperties_url": {
+			"value": "https://ashima26julyadls.dfs.core.windows.net/"
+		},
+		"human_tissue_df_ls_properties_typeProperties_url": {
+			"value": "https://ashima26julyadls.dfs.core.windows.net/"
+		},
+		"ls_adls_json_properties_typeProperties_url": {
+			"value": "https://geneticsusecase2.dfs.core.windows.net"
+		},
+		"rest_adls_json_ls_properties_typeProperties_url": {
+			"value": "https://ashima26julyadls.dfs.core.windows.net/"
+		},
+		"vcf_adls_ds_properties_typeProperties_url": {
+			"value": "https://ashima26julyadls.dfs.core.windows.net/"
+		},
+		"vcf_csv_ls_properties_typeProperties_url": {
+			"value": "https://ashima26julyadls.dfs.core.windows.net/"
+		}
+	}
+}
