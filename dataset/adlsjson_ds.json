@@ -2,7 +2,7 @@
 	"name": "adlsjson_ds",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "adlsjson_ls",
+			"referenceName": "ls_adls_json",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
