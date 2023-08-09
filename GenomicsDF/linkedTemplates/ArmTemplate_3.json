@@ -357,7 +357,12 @@
 							{
 								"referenceName": "adlsjson_ds",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"folderPath": {
+										"value": "@concat('landing/', formatDateTime(utcNow(), 'yyyy'), '/' , formatDateTime(utcNow(), 'MM'), '/' , formatDateTime(utcNow(), 'dd'), '/' , formatDateTime(utcNow(), 'HH'), '/' , formatDateTime(utcNow(), 'mm'), '/' , formatDateTime(utcNow(), 'ss'))",
+										"type": "Expression"
+									}
+								}
 							}
 						]
 					}

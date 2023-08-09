@@ -24025,7 +24025,12 @@
 							{
 								"referenceName": "adlsjson_ds",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"folderPath": {
+										"value": "@concat('landing/', formatDateTime(utcNow(), 'yyyy'), '/' , formatDateTime(utcNow(), 'MM'), '/' , formatDateTime(utcNow(), 'dd'), '/' , formatDateTime(utcNow(), 'HH'), '/' , formatDateTime(utcNow(), 'mm'), '/' , formatDateTime(utcNow(), 'ss'))",
+										"type": "Expression"
+									}
+								}
 							}
 						]
 					}
@@ -35834,11 +35839,20 @@
 					"referenceName": "ls_adls_json",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"folderPath": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"type": "Json",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
+						"folderPath": {
+							"value": "@dataset().folderPath",
+							"type": "Expression"
+						},
 						"fileSystem": "landing"
 					}
 				},

@@ -23980,11 +23980,20 @@
 					"referenceName": "ls_adls_json",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"folderPath": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"type": "Json",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
+						"folderPath": {
+							"value": "@dataset().folderPath",
+							"type": "Expression"
+						},
 						"fileSystem": "landing"
 					}
 				},
