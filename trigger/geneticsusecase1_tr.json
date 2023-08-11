@@ -2,7 +2,7 @@
 	"name": "geneticsusecase1_tr",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
@@ -20,7 +20,7 @@
 				"timeZone": "UTC",
 				"schedule": {
 					"minutes": [
-						15
+						25
 					],
 					"hours": [
 						13
