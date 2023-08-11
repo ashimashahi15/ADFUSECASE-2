@@ -1,0 +1,19 @@
+{
+	"name": "adls_json_sql_ds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adls_sql1_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "staging",
+				"fileSystem": "landing"
+			}
+		},
+		"schema": {}
+	}
+}

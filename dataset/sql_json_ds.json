@@ -1,0 +1,16 @@
+{
+	"name": "sql_json_ds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sql_json_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "geneticsusecase1"
+		}
+	}
+}

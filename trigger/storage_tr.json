@@ -1,0 +1,24 @@
+{
+	"name": "storage_tr",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "geneticsUS1",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/landing/blobs/staging",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/4bd732ad-4107-4153-854e-aac627ef4707/resourceGroups/bioinformatics/providers/Microsoft.Storage/storageAccounts/geneticsusecase2",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
