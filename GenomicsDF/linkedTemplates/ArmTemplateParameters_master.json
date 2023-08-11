@@ -74,6 +74,9 @@
 		"vcf_csv_ls_accountKey": {
 			"value": ""
 		},
+		"adls_sql1_ls_accountKey": {
+			"value": ""
+		},
 		"ADLS_LS_properties_typeProperties_url": {
 			"value": "https://ashima26julyadls.dfs.core.windows.net/"
 		},
@@ -151,6 +154,18 @@
 		},
 		"vcf_csv_ls_properties_typeProperties_url": {
 			"value": "https://ashima26julyadls.dfs.core.windows.net/"
+		},
+		"adls_sql1_ls_properties_typeProperties_url": {
+			"value": "https://geneticsusecase2.dfs.core.windows.net/"
+		},
+		"aky_sql_ls_properties_typeProperties_baseUrl": {
+			"value": "https://geneticsusecasekv.vault.azure.net/"
+		},
+		"sql_json_ls_properties_typeProperties_connectionString_secretName": {
+			"value": "sqlconnect"
+		},
+		"storage_tr_properties_typeProperties_scope": {
+			"value": "/subscriptions/4bd732ad-4107-4153-854e-aac627ef4707/resourceGroups/bioinformatics/providers/Microsoft.Storage/storageAccounts/geneticsusecase2"
 		},
 		"containerUri": {
 			"value": ""

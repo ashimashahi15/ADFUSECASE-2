@@ -43,6 +43,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'vcf_csv_ls'"
 		},
+		"adls_sql1_ls_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'adls_sql1_ls'"
+		},
 		"gen1_ls_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://ashima26julyadls.dfs.core.windows.net/"
@@ -74,6 +78,14 @@
 		"vcf_csv_ls_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://ashima26julyadls.dfs.core.windows.net/"
+		},
+		"adls_sql1_ls_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://geneticsusecase2.dfs.core.windows.net/"
+		},
+		"aky_sql_ls_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://geneticsusecasekv.vault.azure.net/"
 		}
 	},
 	"variables": {
@@ -303,6 +315,36 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/adls_sql1_ls')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('adls_sql1_ls_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('adls_sql1_ls_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aky_sql_ls')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('aky_sql_ls_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Binary_DS')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -427,53 +469,6 @@
 						"type": "String"
 					}
 				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/adls_binary_ds')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "adls_bin_ls",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "humanProtein",
-						"fileSystem": "landing"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/adls_csv_ds')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "adls_rest_ls",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "restdata",
-						"fileSystem": "landing"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
 			},
 			"dependsOn": []
 		}
