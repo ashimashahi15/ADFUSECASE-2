@@ -17,6 +17,29 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/adls_sql_ds')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "adls_json_ls",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "data_a57c7eaa-332d-44fd-8567-04ae78ab33e1_c6aa145a-4e9c-4cff-9429-3aa0d9e8bcf4.json",
+						"folderPath": "Restdata",
+						"fileSystem": "landing"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/adls_to_sql_ds')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -23904,6 +23927,7 @@
 				"lastPublishTime": "2023-07-24T10:02:06Z"
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/adls_sql_ds')]",
 				"[concat(variables('factoryId'), '/datasets/adls_to_sql_ds')]"
 			]
 		},
@@ -23969,38 +23993,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/http_binary_ds')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/adlsjson_ds')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls_adls_json",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"folderPath": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": {
-							"value": "@dataset().folderPath",
-							"type": "Expression"
-						},
-						"fileSystem": "landing"
-					}
-				},
-				"schema": {}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_adls_json')]"
 			]
 		}
 	]
