@@ -1,0 +1,10 @@
+{
+	"name": "aky_sql_ls",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://geneticsusecasekv.vault.azure.net/"
+		}
+	}
+}
