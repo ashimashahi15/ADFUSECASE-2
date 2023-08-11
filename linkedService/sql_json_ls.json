@@ -1,0 +1,17 @@
+{
+	"name": "sql_json_ls",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "aky_sql_ls",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "sqlconnect"
+			}
+		}
+	}
+}
