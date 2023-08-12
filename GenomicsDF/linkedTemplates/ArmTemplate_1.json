@@ -43,9 +43,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'vcf_csv_ls'"
 		},
-		"adls_sql1_ls_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'adls_sql1_ls'"
+		"aky_adls_ls_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://geneticsusecasekv.vault.azure.net/"
+		},
+		"aky_sql_ls_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://geneticsusecasekv.vault.azure.net/"
 		},
 		"gen1_ls_properties_typeProperties_url": {
 			"type": "string",
@@ -78,20 +82,38 @@
 		"vcf_csv_ls_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://ashima26julyadls.dfs.core.windows.net/"
-		},
-		"adls_sql1_ls_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://geneticsusecase2.dfs.core.windows.net/"
-		},
-		"aky_sql_ls_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://geneticsusecasekv.vault.azure.net/"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/aky_adls_ls')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('aky_adls_ls_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aky_sql_ls')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('aky_sql_ls_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/blob_binary_ls')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -310,36 +332,6 @@
 							]
 						}
 					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/adls_sql1_ls')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('adls_sql1_ls_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('adls_sql1_ls_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/aky_sql_ls')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureKeyVault",
-				"typeProperties": {
-					"baseUrl": "[parameters('aky_sql_ls_properties_typeProperties_baseUrl')]"
 				}
 			},
 			"dependsOn": []

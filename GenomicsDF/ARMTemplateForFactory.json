@@ -47,6 +47,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'adls_rest_ls'"
 		},
+		"adls_sql1_ls_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'adls_sql1_ls'"
+		},
 		"adls_sql_Ls_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'adls_sql_Ls'"
@@ -98,10 +102,6 @@
 		"vcf_csv_ls_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'vcf_csv_ls'"
-		},
-		"adls_sql1_ls_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'adls_sql1_ls'"
 		},
 		"ADLS_LS_properties_typeProperties_url": {
 			"type": "string",
@@ -159,6 +159,10 @@
 			"type": "string",
 			"defaultValue": "https://ashima26julyadls.dfs.core.windows.net/"
 		},
+		"adls_sql1_ls_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://geneticsusecase2.dfs.core.windows.net/"
+		},
 		"adls_vcf_csv_ls_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://ashima26julyadls.dfs.core.windows.net/"
@@ -168,6 +172,10 @@
 			"defaultValue": "https://geneticsusecase2.dfs.core.windows.net/"
 		},
 		"aky_adls_ls_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://geneticsusecasekv.vault.azure.net/"
+		},
+		"aky_sql_ls_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://geneticsusecasekv.vault.azure.net/"
 		},
@@ -199,6 +207,10 @@
 			"type": "string",
 			"defaultValue": "https://ashima26julyadls.dfs.core.windows.net/"
 		},
+		"sql_json_ls_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "sqlconnect"
+		},
 		"vcf_adls_ds_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://ashima26julyadls.dfs.core.windows.net/"
@@ -206,18 +218,6 @@
 		"vcf_csv_ls_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://ashima26julyadls.dfs.core.windows.net/"
-		},
-		"adls_sql1_ls_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://geneticsusecase2.dfs.core.windows.net/"
-		},
-		"aky_sql_ls_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://geneticsusecasekv.vault.azure.net/"
-		},
-		"sql_json_ls_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "sqlconnect"
 		},
 		"storage_tr_properties_typeProperties_scope": {
 			"type": "string",
@@ -23995,6 +23995,73 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/geneticsUS1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "json file from adls to sql db",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*.json",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "JsonReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false,
+								"tableOption": "autoCreate",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "adls_json_sql_ds",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "sql_json_ds",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/adls_json_sql_ds')]",
+				"[concat(variables('factoryId'), '/datasets/sql_json_ds')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/geneticsUseCase1')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -35805,6 +35872,30 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/adls_json_sql_ds')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "adls_sql1_ls",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "staging",
+						"fileSystem": "landing"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/adls_sql1_ls')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/adls_sql_ds')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -36148,6 +36239,27 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/sql_json_ds')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "sql_json_ls",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "geneticsusecase1"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/sql_json_ls')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ADLS_LS')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -36389,6 +36501,23 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/adls_sql1_ls')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('adls_sql1_ls_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('adls_sql1_ls_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/adls_sql_Ls')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -36457,6 +36586,19 @@
 				"type": "AzureKeyVault",
 				"typeProperties": {
 					"baseUrl": "[parameters('aky_adls_ls_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aky_sql_ls')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('aky_sql_ls_properties_typeProperties_baseUrl')]"
 				}
 			},
 			"dependsOn": []
@@ -36622,6 +36764,28 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/sql_json_ls')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "aky_sql_ls",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "[parameters('sql_json_ls_properties_typeProperties_connectionString_secretName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/aky_sql_ls')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/vcf_adls_ds')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -36705,6 +36869,36 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/storage_tr')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "geneticsUS1",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/landing/blobs/staging",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('storage_tr_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/geneticsUS1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Transformed_human_tissue_data')]",
@@ -36852,200 +37046,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/adls2_csv_ds')]",
 				"[concat(variables('factoryId'), '/datasets/genetics_refined_ds')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/geneticsUS1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "json file from adls to sql db",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "JsonSource",
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*.json",
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "JsonReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink",
-								"writeBehavior": "insert",
-								"sqlWriterUseTableLock": false,
-								"tableOption": "autoCreate",
-								"disableMetricsCollection": false
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "adls_json_sql_ds",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "sql_json_ds",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/adls_json_sql_ds')]",
-				"[concat(variables('factoryId'), '/datasets/sql_json_ds')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/adls_sql1_ls')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('adls_sql1_ls_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('adls_sql1_ls_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/adls_json_sql_ds')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "adls_sql1_ls",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "staging",
-						"fileSystem": "landing"
-					}
-				},
-				"schema": {}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/adls_sql1_ls')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/aky_sql_ls')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureKeyVault",
-				"typeProperties": {
-					"baseUrl": "[parameters('aky_sql_ls_properties_typeProperties_baseUrl')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/sql_json_ls')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "aky_sql_ls",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "[parameters('sql_json_ls_properties_typeProperties_connectionString_secretName')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/aky_sql_ls')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/sql_json_ds')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "sql_json_ls",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "geneticsusecase1"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/sql_json_ls')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/storage_tr')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "geneticsUS1",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/landing/blobs/staging",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('storage_tr_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/geneticsUS1')]"
 			]
 		}
 	]

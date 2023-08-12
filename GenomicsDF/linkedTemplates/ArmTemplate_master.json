@@ -47,6 +47,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'adls_rest_ls'"
 		},
+		"adls_sql1_ls_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'adls_sql1_ls'"
+		},
 		"adls_sql_Ls_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'adls_sql_Ls'"
@@ -98,10 +102,6 @@
 		"vcf_csv_ls_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'vcf_csv_ls'"
-		},
-		"adls_sql1_ls_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'adls_sql1_ls'"
 		},
 		"ADLS_LS_properties_typeProperties_url": {
 			"type": "string",
@@ -159,6 +159,10 @@
 			"type": "string",
 			"defaultValue": "https://ashima26julyadls.dfs.core.windows.net/"
 		},
+		"adls_sql1_ls_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://geneticsusecase2.dfs.core.windows.net/"
+		},
 		"adls_vcf_csv_ls_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://ashima26julyadls.dfs.core.windows.net/"
@@ -168,6 +172,10 @@
 			"defaultValue": "https://geneticsusecase2.dfs.core.windows.net/"
 		},
 		"aky_adls_ls_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://geneticsusecasekv.vault.azure.net/"
+		},
+		"aky_sql_ls_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://geneticsusecasekv.vault.azure.net/"
 		},
@@ -199,6 +207,10 @@
 			"type": "string",
 			"defaultValue": "https://ashima26julyadls.dfs.core.windows.net/"
 		},
+		"sql_json_ls_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "sqlconnect"
+		},
 		"vcf_adls_ds_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://ashima26julyadls.dfs.core.windows.net/"
@@ -206,18 +218,6 @@
 		"vcf_csv_ls_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://ashima26julyadls.dfs.core.windows.net/"
-		},
-		"adls_sql1_ls_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://geneticsusecase2.dfs.core.windows.net/"
-		},
-		"aky_sql_ls_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://geneticsusecasekv.vault.azure.net/"
-		},
-		"sql_json_ls_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "sqlconnect"
 		},
 		"storage_tr_properties_typeProperties_scope": {
 			"type": "string",
@@ -280,6 +280,9 @@
 					"adls_rest_ls_accountKey": {
 						"value": "[parameters('adls_rest_ls_accountKey')]"
 					},
+					"adls_sql1_ls_accountKey": {
+						"value": "[parameters('adls_sql1_ls_accountKey')]"
+					},
 					"adls_sql_Ls_connectionString": {
 						"value": "[parameters('adls_sql_Ls_connectionString')]"
 					},
@@ -334,14 +337,14 @@
 					"adls_rest_ls_properties_typeProperties_url": {
 						"value": "[parameters('adls_rest_ls_properties_typeProperties_url')]"
 					},
+					"adls_sql1_ls_properties_typeProperties_url": {
+						"value": "[parameters('adls_sql1_ls_properties_typeProperties_url')]"
+					},
 					"adls_vcf_csv_ls_properties_typeProperties_url": {
 						"value": "[parameters('adls_vcf_csv_ls_properties_typeProperties_url')]"
 					},
 					"adlsjson_ls_properties_typeProperties_url": {
 						"value": "[parameters('adlsjson_ls_properties_typeProperties_url')]"
-					},
-					"aky_adls_ls_properties_typeProperties_baseUrl": {
-						"value": "[parameters('aky_adls_ls_properties_typeProperties_baseUrl')]"
 					}
 				}
 			},
@@ -388,8 +391,11 @@
 					"vcf_csv_ls_accountKey": {
 						"value": "[parameters('vcf_csv_ls_accountKey')]"
 					},
-					"adls_sql1_ls_accountKey": {
-						"value": "[parameters('adls_sql1_ls_accountKey')]"
+					"aky_adls_ls_properties_typeProperties_baseUrl": {
+						"value": "[parameters('aky_adls_ls_properties_typeProperties_baseUrl')]"
+					},
+					"aky_sql_ls_properties_typeProperties_baseUrl": {
+						"value": "[parameters('aky_sql_ls_properties_typeProperties_baseUrl')]"
 					},
 					"gen1_ls_properties_typeProperties_url": {
 						"value": "[parameters('gen1_ls_properties_typeProperties_url')]"
@@ -414,12 +420,6 @@
 					},
 					"vcf_csv_ls_properties_typeProperties_url": {
 						"value": "[parameters('vcf_csv_ls_properties_typeProperties_url')]"
-					},
-					"adls_sql1_ls_properties_typeProperties_url": {
-						"value": "[parameters('adls_sql1_ls_properties_typeProperties_url')]"
-					},
-					"aky_sql_ls_properties_typeProperties_baseUrl": {
-						"value": "[parameters('aky_sql_ls_properties_typeProperties_baseUrl')]"
 					}
 				}
 			},
