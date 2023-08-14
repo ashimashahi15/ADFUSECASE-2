@@ -24108,6 +24108,7 @@
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
 					"blobPathBeginsWith": "/landing/blobs/staging",
+					"blobPathEndsWith": "json",
 					"ignoreEmptyBlobs": true,
 					"scope": "[parameters('storage_tr_properties_typeProperties_scope')]",
 					"events": [
