@@ -14,6 +14,7 @@
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
 			"blobPathBeginsWith": "/landing/blobs/staging",
+			"blobPathEndsWith": "json",
 			"ignoreEmptyBlobs": true,
 			"scope": "/subscriptions/4bd732ad-4107-4153-854e-aac627ef4707/resourceGroups/bioinformatics/providers/Microsoft.Storage/storageAccounts/geneticsusecase2",
 			"events": [
